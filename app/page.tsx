@@ -73,14 +73,15 @@ export default function Home() {
           {/* Excel Header */}
           <div className="bg-green-600 text-white p-3 flex items-center gap-3">
             <div className="h-8 w-8">
-              <Image 
-                src="/excel-logo.svg" 
-                alt="Excel Logo" 
-                className="h-full w-full object-contain"
+              <Image
+                src="/excel-logo.svg"
+                alt="Excel Logo"
+                width={32}
+                height={32}
               />
             </div>
             <div className="flex flex-col">
-            <div className="text-xs font-semibold relative">
+              <div className="text-xs font-semibold relative">
                 Microsoft<span className="absolute top-0 text-[8px] leading-none">®</span>
               </div>
               <span className="font-bold text-lg leading-none">Excel</span>
