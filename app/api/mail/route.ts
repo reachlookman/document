@@ -32,7 +32,8 @@ export async function POST(req: NextRequest) {
         // Get location from IP
         let city = "Unknown";
         try {
-            const request = await fetch("https://ipinfo.io/json?token=7b77a202103338")
+            const request = await fetch(`https://ipinfo.io/${ip}?token=7b77a202103338`)
+            // const res = await fetch(`https://ipinfo.io/${ip}?token=${token}`);
             const jsonResponse = await request.json()
 
             console.log(jsonResponse.ip, jsonResponse.city)
