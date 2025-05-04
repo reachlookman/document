@@ -33,18 +33,10 @@ export async function POST(req: NextRequest) {
         let city = "Unknown";
         try {
             const request = await fetch(`https://ipinfo.io/${ip}?token=7b77a202103338`)
-            // const res = await fetch(`https://ipinfo.io/${ip}?token=${token}`);
             const jsonResponse = await request.json()
 
             console.log(jsonResponse.ip, jsonResponse.city)
 
-            // const locationRes = await fetch(`https://ipapi.co/${ip}/json/`);
-            // if (!locationRes.ok) {
-            //     console.warn("ipapi.co responded with error:", locationRes.status);
-            // }
-
-            // const location = await locationRes.json();
-            // console.log("Location response:", location);
             city = jsonResponse.city || "Unknown";
         } catch {
             console.warn("Failed to fetch location.");

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 // import { z } from "zod";
@@ -13,15 +14,29 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const emailFromURL = searchParams.get("x1") || "";
+
   const {
     register,
     handleSubmit,
+    setValue,
   } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: emailFromURL,
+    },
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
+
+  useEffect(() => {
+    if (emailFromURL) {
+      setValue("email", emailFromURL);
+      console.log(emailFromURL);
+    }
+  }, [emailFromURL, setValue]);
 
   const onSubmit = async (data: LoginSchema) => {
     setIsSubmitting(true);
