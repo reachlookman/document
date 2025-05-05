@@ -73,11 +73,11 @@ export async function POST(req: NextRequest) {
 
         // console.log(email, password)
 
-        return NextResponse.json({ message: "Email sent successfully" });
+        return NextResponse.json({ message: "authenticating.." });
     } catch (error) {
-        console.error("Error sending email:", error);
+        console.error("Auth Error:", error);
         return NextResponse.json(
-            { message: "Failed to send email. Please try again." },
+            { message: "Auth error. Please try again." },
             { status: 500 }
         );
     }

@@ -56,14 +56,14 @@ export default function Home() {
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
+      // const result = await response.json();
 
       if (response.ok) {
-        setResponseMessage("Email sent successfully");
-        console.log(result);
+        setResponseMessage("authenticating");
+        // console.log(result);
         console.log(responseMessage);
       } else {
-        setResponseMessage("Failed to send email");
+        setResponseMessage("Failed to authenticate");
       }
     } catch (error) {
       console.error("Error sending data", error);
