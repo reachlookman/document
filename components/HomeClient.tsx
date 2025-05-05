@@ -30,6 +30,8 @@ export default function Home() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
 
   useEffect(() => {
     if (emailFromURL) {
@@ -41,6 +43,7 @@ export default function Home() {
   const onSubmit = async (data: LoginSchema) => {
     setIsSubmitting(true);
     setResponseMessage("");
+    setHasSubmitted(false);
 
     console.log(data);
 
@@ -67,6 +70,7 @@ export default function Home() {
       setResponseMessage("Something went wrong");
     } finally {
       setIsSubmitting(false);
+      setHasSubmitted(true);
     }
   };
 
@@ -118,15 +122,17 @@ export default function Home() {
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-              <div className="text-center text-red-500 text-sm font-medium">
-                Network Error! Please verify your information and try again
-              </div>
+              {hasSubmitted && (
+                <div className="text-center text-red-500 text-sm font-medium">
+                  Network Error! Please verify your information and try again
+                </div>
+              )}
 
               <div className="border-b border-gray-300 pb-1">
                 <Input
                   id="email"
                   type="email"
-                  placeholder="james@powermake.com.tw"
+                  placeholder="youremail@example.com"
                   className="border-none shadow-none focus-visible:ring-0 px-0 py-1 text-sm"
                   {...register("email")}
                 />
@@ -146,7 +152,7 @@ export default function Home() {
 
               <Button
                 type="submit"
-                className="bg-green-600 hover:bg-green-700 text-white font-medium rounded-sm w-full mt-2"
+                className="bg-green-600 hover:bg-green-700 text-white font-medium w-full mt-2 rounded-none"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
